@@ -1,62 +1,67 @@
-/// <reference types="Cypress" />
- 
-describe('My First Test Suite', function() 
+//describe is test suite and IT is test cases/
+
+describe("my first test",function()
 {
- 
-it('My FirstTest case',function() {
- 
- 
+
+it('my first test',function()
+{
+//go to rahulshety akademie
 cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
-cy.get('.search-keyword').type('ca')
+//Allias wil help to assign locator to variable
+
+cy.get('.products').as('productslocator')
+
+//search for ca
+cy.get('input[type="search"]').type('ca')
 cy.wait(2000)
-//selenium get hit url in browser, cypress get acts like findElement of selenium
-cy.get('.product').should('have.length',5)
-cy.get('.product:visible').should('have.length',4)
-//Parent child chaining
-cy.get('.products').as('productLocator')
-cy.get('@productLocator').find('.product').should('have.length',4)
-cy.get(':nth-child(3) > .product-action > button').click()
-cy.get('@productLocator').find('.product').eq(2).contains('ADD TO CART').click().then(function()
+
+//check the list has 4 items
+cy.get('.product:visible').should('have.length','4')
+
+cy.get('@productslocator').find('.product').should('have.length','4')
+
+// add the 2nd itwm in the search list to the cart.
+cy.get('@productslocator').find('.product').eq(1).contains('ADD TO CART').click().then(function()
+
 {
     console.log('sf')
-})
- 
-cy.get('@productLocator').find('.product').each(($el, index, $list) => {
- 
-const textVeg=$el.find('h4.product-name').text()
-if(textVeg.includes('Cashews'))
-{
-$el.find('button').click()
 }
+
+)
+
+// add carrot to the cart
+cy.get('@productslocator').find('.product').each(($el, index, $list) => {
+
+    const productName= $el.find('h4.product-name').text()
+
+if(productName.includes('Caul'))
+
+    {
+        cy.wrap($el).find('div button').click()
+    }
+
 })
- 
-//assert if logo text is correctly displayed
-cy.get('.brand').should('have.text','GREENKART')
- 
-//this is to print in logs
-cy.get('.brand').then(function(logoelement)
+
+//get the brand name form the page using promise resolution
+
+//assert to chekc the text is matchint
+cy.get('.brand').should('have.text','GREENKART').then(function(variable)
 {
-    cy.log(logoelement.text())
- 
+    cy.log('the got test is', variable.text(),'the expected is GREENKART')
+
 })
-//const logo=cy.get('.brand')
-//cy.log(cy.get('.brand').text())
-// cy.log(logo.text())
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-//fixture
- 
-}  )
- 
- 
- 
-}  )
+
+//print in log the output
+cy.get('.brand').then(function(variable)
+{
+    cy.log(variable.text())
+
+})
+
+
+
+
+})
+
+
+})
