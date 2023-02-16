@@ -1,0 +1,9 @@
+class amazonloginPage {
+
+    getEnterEmailId(){
+        return cy.get('#ap_email')
+    }
+
+}
+
+export default amazonloginPage
