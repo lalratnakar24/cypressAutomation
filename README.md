@@ -18,6 +18,8 @@ if not the do below
 6. Click in visual studio Open folder and add that filder you have created
 7. Install cypress using npm.-- npm intall cypress
    to add it in package.json file npm intall cypress --save-dev
+8. Cypress will create default folders like downloads, fixture.support
+9. Create a nw folder Integration and examples instide it to keep all the test cases called spec.
 
    Running test runner
   1. Now you have the cypress install anf you will see a folder is created in your project- 
